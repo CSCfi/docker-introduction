@@ -79,6 +79,12 @@ Downsides of "full" virtualisation:
 
 Containers are cut-down virtual machines. Containers sacrifice the strong isolation that full virtualisation provides in order to vastly reduce the resource requirements on the virtualisation host.
 
+Whereas a virtual machine uses a dedicated kernel (plus libraries and binaries) and runs on top of an Hypervisor that uses in, a container uses the shared kernel (plus libraries and binaries) of the host's operating system.
+
+![Containers vs. VMs](../fig/containers_vs_vms.png)
+
+This is possible given the `namespaces` feature of the Linux kernel, that provides userspace isolation for running "contained" processes. 
+
 The term "container" can be usefully considered with reference to shipping containers. Before shipping containers were developed, packing and unpacking cargo ships was time consuming, and error prone, with high potential for different clients' goods to become mixed up. Software containers standardise the packaging of a complete software system (the lightweight virtual machine): you can drop a container into a container host, and it should "just work".
 
 Hopefully this lesson will demonstrate the portability aspect of containers, showing the *same* containers running on:
@@ -93,11 +99,17 @@ Docker is software that manages containers and the resources that containers nee
 
 ### Docker's terminology
 
-- **Image**: this is the term that Docker uses to describe the template from which live instances of containers will be created. The term "container image" may sometimes be used to emphasise that the "image" relates to software containers and not, say, the sense of an "image" when discussing cute kitten pictures (without loss of generality).
+- **Image**: this is the term that Docker uses to describe the template from which live instances of containers will be created. The term "container image" may sometimes be used to emphasise that the "image" relates to a template to run software containers. A Docker-compatibility container image can be thought as a self-contained set of files that enables Docker to run a container. Like an hamburger ("kerroshampurilainen") that could be used to make and customise other hamburgers (the containers)
 - **Container**: this is an instance of a lightweight virtual machine created by Docker from a (container) image.
 - **Hub**: the Docker hub is a storage resource and associated website where a vast collection of preexisting container images are documented, and are made available for your use.
 
+### References
+[Docker Overview](https://docs.docker.com/engine/docker-overview/)
+[Docker and Linux namespaces](https://success.docker.com/article/introduction-to-user-namespaces-in-docker-engine)
+
+
 {% include links.md %}
+
 
 {% comment %}
 <!--  LocalWords:  keypoints links.md endcomment

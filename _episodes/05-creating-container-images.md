@@ -47,7 +47,7 @@ $ docker build -t my-container .
 Sending build context to Docker daemon  2.048kB
 Step 1/3 : FROM alpine
 latest: Pulling from library/alpine
-6c40cc604d8e: Pull complete 
+6c40cc604d8e: Pull complete
 Digest: sha256:b3dbf31b77fd99d9c08f780ce6f5282aba076d70a513a8be859d8d3a4d0c92b8
 Status: Downloaded newer image for alpine:latest
  ---> caf27325b298
@@ -97,7 +97,7 @@ $ docker push dme26/my-container
 {: .language-bash}
 ~~~
 The push refers to repository [docker.io/dme26/my-container]
-503e53e365f3: Mounted from library/alpine 
+503e53e365f3: Mounted from library/alpine
 latest: digest: sha256:1d599b3e195e282648a30719f159422165656781de420ccb6173465ac29d2b7a size: 528
 ~~~
 {: .output}
@@ -130,11 +130,11 @@ $ docker build -t another-greeting .
 Sending build context to Docker daemon  2.048kB
 Step 1/4 : FROM python:3-slim
 3-slim: Pulling from library/python
-743f2d6c1f65: Pull complete 
-977e13fc7449: Pull complete 
-de5f9e5af26b: Pull complete 
-0d27ddbe8383: Pull complete 
-228d55eb5a23: Pull complete 
+743f2d6c1f65: Pull complete
+977e13fc7449: Pull complete
+de5f9e5af26b: Pull complete
+0d27ddbe8383: Pull complete
+228d55eb5a23: Pull complete
 Digest: sha256:589527a734f2a9e48b23cc4687848cb9503d0f8569fad68c3ad8b2ee9d1c50ff
 Status: Downloaded newer image for python:3-slim
  ---> ca7f9e245002
@@ -304,7 +304,7 @@ x-coordinate,y-coordinate,colour,size
 0.41059850,1.48051479,0.58641017,399.02532200
 0.14404357,1.86755896,0.06395527,904.04439300
 1.45427351,0.90604466,0.48562760,690.0250200
-0.76103773,-0.86122569,0.9774951,699.62205400
+0.76103773,-0.86122569,0.9774951,699.62205400in isolation.
 0.12167502,1.91006495,0.87650525,327.72040200
 0.44386323,-0.26800337,0.33815895,756.77864300
 0.33367433,0.80245640,0.96157016,636.06105500
@@ -337,6 +337,28 @@ Change your `data.csv` file, and rerun the appropriate preceding `docker run` in
 You should see the PDF and PNG file update appropriately.
 
 You have now successfully implemented an image that creates containers that transform input data through a stable, reproducible computational environment into output, in the form of plot images.
+
+
+### Logging and debugging
+
+Let's try to find additional information about the `csv-to-scatter` container that we have just run:
+
+{: .language-bash}
+~~~
+$ docker container ls -a
+CONTAINER ID        IMAGE                 COMMAND                  CREATED             STATUS                         PORTS               NAMES
+4fc46fab3e09        csv-to-scatter-plot   "python ./csv-to-sca…"   37 seconds ago      Exited (0) 34 seconds ago                          tender_franklin
+~~~
+{: .output}
+
+As we can see, we can reference containers by their hash ID, or by their name. Ins this case `4fc46fab3e09` and `tender_franklin`, respectively.
+
+Let's use the `docker logs` command (with the huma readable name) to find out more:
+
+
+
+
+
 
 {% include links.md %}
 
