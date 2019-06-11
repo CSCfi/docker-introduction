@@ -418,13 +418,13 @@ The previous two commands would be basically the same as `docker rm --force loop
 
 Let's start another process with `-it` and also with `--rm` to remove it automatically after it has exited. This means that there is no garbage containers left behind, but also that `docker start` can not be used to start the container after it has exited.
 
-`docker run -d --rm -it --name loop-guru-it centos sh -c 'while true; do date; sleep 1; done'`
+`docker run -d --rm -it --name loop-guru-2 centos sh -c 'while true; do date; sleep 1; done'`
 
 Now let's attach to the container and hit control+p, control+q that detaches us from the STDOUT.
 
 {: .language-bash}
 ~~~
-$ docker attach loop-guru-it
+$ docker attach loop-guru-2
 
 Mon Jan 15 19:50:42 UTC 2018
 Mon Jan 15 19:50:43 UTC 2018
@@ -437,7 +437,7 @@ But what if actually want to check out log files form the running container itse
 
 {: .language-bash}
 ~~~
-$ docker exec loop-guru-it cat /var/log/yum.log
+$ docker exec loop-guru-2 cat /var/log/yum.log
 Mar 05 17:36:54 Erased: firewalld-0.5.3-5.el7.noarch
 Mar 05 17:36:54 Erased: python-firewall-0.5.3-5.el7.noarch
 Mar 05 17:36:54 Erased: python-slip-dbus-0.4.0-4.el7.noarch
@@ -455,7 +455,7 @@ Mar 05 17:36:55 Erased: ipset-6.38-3.el7_6.x86_64
 Mar 05 17:36:55 Erased: ipset-libs-6.38-3.el7_6.x86_64
 Mar 05 17:36:55 Erased: less-458-9.el7.x86_64
 Mar 05 17:36:55 Erased: groff-base-1.22.2-8.el7.x86_64
-Mar 05 17:36:55 Erased: libmnl-1.0.3-7.el7.x86_64
+Mar 05 17:36:55 Erased: libmnl-1.0.3-7centos.el7.x86_64
 Mar 05 17:36:55 Erased: GeoIP-1.5.0-13.el7.x86_64
 Mar 05 17:36:55 Erased: libnfnetlink-1.0.1-4.el7.x86_64
 Mar 05 17:36:55 Erased: sysvinit-tools-2.88-14.dsf.el7.x86_64
@@ -464,7 +464,7 @@ Mar 05 17:36:56 Erased: ebtables-2.0.10-16.el7.x86_64
 Mar 05 17:36:56 Erased: grubby-8.28-25.el7.x86_64
 ~~~
 
-
+Exercise: check the contents of loop-guru-2 /var/yum.log with an alternative method.
 
 {% include links.md %}
 
