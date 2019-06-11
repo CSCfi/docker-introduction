@@ -418,7 +418,7 @@ The previous two commands would be basically the same as `docker rm --force loop
 
 Let's start another process with `-it` and also with `--rm` to remove it automatically after it has exited. This means that there is no garbage containers left behind, but also that `docker start` can not be used to start the container after it has exited.
 
-`docker run -d --rm -it --name loop-guru-it centos:16.04 sh -c 'while true; do date; sleep 1; done'`
+`docker run -d --rm -it --name loop-guru-it centos sh -c 'while true; do date; sleep 1; done'`
 
 Now let's attach to the container and hit control+p, control+q that detaches us from the STDOUT.
 
