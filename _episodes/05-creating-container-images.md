@@ -437,7 +437,7 @@ But what if actually want to check out log files form the running container itse
 
 {: .language-bash}
 ~~~
-$ docker exec  loop-centos cat /var/log/yum.log
+$ docker exec loop-guru-it cat /var/log/yum.log
 Mar 05 17:36:54 Erased: firewalld-0.5.3-5.el7.noarch
 Mar 05 17:36:54 Erased: python-firewall-0.5.3-5.el7.noarch
 Mar 05 17:36:54 Erased: python-slip-dbus-0.4.0-4.el7.noarch
