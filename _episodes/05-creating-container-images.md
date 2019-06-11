@@ -343,11 +343,11 @@ You have now successfully implemented an image that creates containers that tran
 
 So far, we have merely run containers that run once and exit, and send little or no output to stdout. But what if we like to monitor the logs of a container running as a service?
 
-Let's run a container from the `busybox` image in the background ("-d" option ), that echoes a simple message to stdout:  
+Let's run a container from the `centos` image in the background ("-d" option ), that echoes a simple message to stdout:  
 
 {: .language-bash}
 ~~~
-$ docker run -d --name loop-guru -d centos sh -c "while true; do $(echo date); sleep 1; done"
+$ docker run -d --name loop-guru centos sh -c "while true; do $(echo date); sleep 1; done"
 ~~~
 
 We named this container "loop-guru" (the `--name` option), and that makes it easier to follow its logs. Check that it's running with `docker ps` and follow its logs:
@@ -375,27 +375,32 @@ If we want to attach to a container and make sure we don't close it we can disab
 
 Then try control+c.  
 
-    $ docker start loop-guru
+{: .language-bash}
+~~~
+$ docker start loop-guru
 
-    $ docker attach --sig-proxy=false loop-guru
-      Mon Jan 15 19:27:54 UTC 2018
-      Mon Jan 15 19:27:55 UTC 2018
-      ^C
+$ docker attach --sig-proxy=false loop-guru
+Mon Jan 15 19:27:54 UTC 2018
+Mon Jan 15 19:27:55 UTC 2018
+^C
+~~~
 
 The container will stays running, just disconnecting you from the STDOUT.
 
 To enter a container, we can start a new process in it.
 
-    $ docker exec -it loop-guru bash
+{: .language-bash}
+~~~
+$ docker exec -it loop-guru bash
+root@2a49df3ba735:/# ps aux
 
-      root@2a49df3ba735:/# ps aux
-
-      USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
-      root         1  0.0  0.0   4496  1716 ?        Ss   10:31   0:00 sh -c while true; do date; sleep 1; done
-      root       271  0.0  0.0   4496   704 ?        Ss   10:33   0:00 sh
-      root       300  0.0  0.0  18380  3364 pts/0    Ss   10:33   0:00 bash
-      root       386  0.0  0.0   4368   672 ?        S    10:33   0:00 sleep 1
-      root       387  0.0  0.0  36836  2900 pts/0    R+   10:34   0:00 ps aux
+USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+root         1  0.0  0.0   4496  1716 ?        Ss   10:31   0:00 sh -c while true; do date; sleep 1; done
+root       271  0.0  0.0   4496   704 ?        Ss   10:33   0:00 sh
+root       300  0.0  0.0  18380  3364 pts/0    Ss   10:33   0:00 bash
+root       386  0.0  0.0   4368   672 ?        S    10:33   0:00 sleep 1
+root       387  0.0  0.0  36836  2900 pts/0    R+   10:34   0:00 ps aux
+~~~
 
 In our command `-it` is short for `-i`  and `-t` where `-i` is "interactive, connect STDIN" and `-t` "allocate a pseudo-TTY". From `ps aux` listing we can see that our `bash` process got pid 300. Or to put it more simply, `-it` allows you to interact with the container by using the command line.
 
