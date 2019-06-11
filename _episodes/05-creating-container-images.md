@@ -408,8 +408,11 @@ Now that we're inside the container it behaves like you'd expect from Centos and
 
 Our loop-guru won't stop for SIGTERM that the stop sends but stop sends SIGKILL command after grace period. In this case it's simply faster to use kill.
 
-    $ docker kill loop-guru
-    $ docker rm loop-guru
+{: .language-bash}
+~~~
+$ docker kill loop-guru
+$ docker rm loop-guru
+~~~
 
 The previous two commands would be basically the same as `docker rm --force loop-guru`
 
@@ -419,11 +422,14 @@ Let's start another process with `-it` and also with `--rm` to remove it automat
 
 Now let's attach to the container and hit control+p, control+q that detaches us from the STDOUT.
 
-    $ docker attach loop-guru-it
+{: .language-bash}
+~~~
+$ docker attach loop-guru-it
 
-      Mon Jan 15 19:50:42 UTC 2018
-      Mon Jan 15 19:50:43 UTC 2018
-      ^P^Qread escape sequence
+Mon Jan 15 19:50:42 UTC 2018
+Mon Jan 15 19:50:43 UTC 2018
+^P^Qread escape sequence
+~~~
 
 Note that hitting `^C` would still kill (and remove due to `--rm`) the process because the `docker attach` was done without `--sig-proxy=false`
 
