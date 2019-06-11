@@ -362,10 +362,12 @@ Lets test pausing the loop-guru without exiting or stopping. In another terminal
 
 Keep the logs open and attach to the container on the second terminal using 'attach':
 
-    $ docker attach loop-guru
-      Mon Jan 15 19:26:54 UTC 2018
-      Mon Jan 15 19:26:55 UTC 2018
-      ...
+{: .language-bash}
+~~~
+$ docker attach loop-guru
+Mon Jan 15 19:26:54 UTC 2018
+Mon Jan 15 19:26:55 UTC 2018
+~~~
 
 Now you have logs (STDOUT) running in two terminals. Now in the attach window press control+c. The container is stopped because the process is no longer running.
 
